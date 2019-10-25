@@ -30,3 +30,25 @@ logging:
   level:
     root: INFO
 
+
+management:
+  health:
+    redis:
+      enabled: false
+    rabbit:
+      enabled: false
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+    jmx:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+    shutdown:
+      enabled: true
+    jolokia:
+      enabled: true
+

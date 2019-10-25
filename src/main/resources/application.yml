@@ -1,10 +1,10 @@
 server:
-  port: 80
+  port: 8989
   maxHttpHeaderSize: 65536
   maxPostSize: 4194304
 spring:
   application:
-    name: paymentDemo  
+    name: paymentDemo
   thymeleaf:
     cache: false
     prefix: classpath:/templates/

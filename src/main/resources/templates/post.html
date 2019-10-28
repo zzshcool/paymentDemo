@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>提交表單</title>
+
+    <script>
+        if (window.top !== window.self) {
+            window.top.location = window.location;
+        }
+    </script>
+</head>
+<body>
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"/>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    var postData = [[${postData}]];
+    /*]]>*/
+</script>
+<script type="text/javascript">
+    $().ready(function () {
+        console.log("postData.params:" + postData.params);
+        if (postData.form_url) {
+            var form = $("<form></form>");
+            form.attr('action', postData.action);
+            form.attr('method', 'post');
+            if (postData.params) {
+                var params = postData.params;
+                for (var p in params) {
+                    form.append("<input type='hidden' name='" + p + "' value='" + params[p] + "' />");
+                }
+            }
+            form.appendTo("body");
+            form.css('display', 'none');
+            form.submit();
+            console.log("action:" + postData.action);
+            console.log("params:" + postData.params);
+        }
+    });
+</script>
+</body>
+</html>

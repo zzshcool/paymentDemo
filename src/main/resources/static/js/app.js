@@ -1,11 +1,10 @@
 Ext.application({
-    name: 'SenchaApp',
+    name: 'PaymentApp',
     launch: function () {
-
 
         var linePayForm = Ext.create('Ext.form.Panel', {
             title: 'Line Pay',
-            bodyPadding: 20,
+            bodyPadding: 10,
             layout: 'vbox',
             defaultType: 'textfield',
             items: [
@@ -25,14 +24,14 @@ Ext.application({
                     xtype: 'button',
                     text: '提交',
                     handler: function () {
+                        alert('提交')
                     }
                 }
             ]
         });
+
         var allPayForm = Ext.create('Ext.form.Panel', {
             title: '歐付寶',
-            height: 350,
-            width: 300,
             bodyPadding: 10,
             defaultType: 'textfield',
             items: [
@@ -48,6 +47,7 @@ Ext.application({
                     xtype: 'button',
                     text: '提交',
                     handler: function () {
+                        alert('提交')
                     }
                 }
             ]
@@ -55,8 +55,6 @@ Ext.application({
 
         var greenPayForm = Ext.create('Ext.form.Panel', {
             title: '綠界支付',
-            height: 350,
-            width: 300,
             bodyPadding: 10,
             defaultType: 'textfield',
             items: [
@@ -75,6 +73,33 @@ Ext.application({
                     xtype: 'button',
                     text: '提交',
                     handler: function () {
+                        alert('提交')
+                    }
+                }
+            ]
+        });
+
+        var aliPayForm = Ext.create('Ext.form.Panel', {
+            title: '支付寶',
+            bodyPadding: 10,
+            defaultType: 'textfield',
+            items: [
+                {
+                    fieldLabel: 'First Name',
+                    name: 'firstName'
+                },
+                {
+                    fieldLabel: 'Last Name',
+                    name: 'lastName'
+                },
+                {
+                    fieldLabel: 'Date of Birth',
+                    name: 'birthDate'
+                }, {
+                    xtype: 'button',
+                    text: '提交',
+                    handler: function () {
+                        alert('提交')
                     }
                 }
             ]
@@ -89,7 +114,8 @@ Ext.application({
             items: [
                 linePayForm,
                 allPayForm,
-                greenPayForm
+                greenPayForm,
+                aliPayForm
             ]
 
         });

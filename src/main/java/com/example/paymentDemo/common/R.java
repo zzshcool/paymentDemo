@@ -11,9 +11,6 @@ import java.util.Map;
 public class R extends HashMap<String, Object> {
     private static final long serialVersionUID = 1L;
 
-    @Resource
-    ObjectMapper mapper;
-
     public R() {
         put(Constant.result_code, Constant.result_code_succ);
         put(Constant.result_msg, Constant.result_msg_succ);

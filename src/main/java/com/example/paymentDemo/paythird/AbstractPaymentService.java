@@ -3,6 +3,7 @@ package com.example.paymentDemo.paythird;
 import com.example.paymentDemo.common.R;
 import com.example.paymentDemo.common.consts.PayConstants;
 import com.example.paymentDemo.common.util.MD5Util;
+import com.example.paymentDemo.model.FormBody;
 import com.example.paymentDemo.model.Order;
 import com.example.paymentDemo.paythird.ecpay.ECPayConst;
 import com.example.paymentDemo.paythird.ecpay.SHAUtil;
@@ -21,13 +22,12 @@ import java.util.TreeSet;
 @Slf4j
 public abstract class AbstractPaymentService {
 
-    public abstract R order(Order order);
+    public abstract R order(FormBody order);
 
     public abstract R query(Order order);
 
     /**
      * @param order
-     * @param request
      * @param requestBody
      * @return
      * @Description bopay 回调处理
@@ -72,19 +72,19 @@ public abstract class AbstractPaymentService {
         return null;
     }
 
-    public Map<String, String> createJumpResultMap(Order order, Map<String, String> formData, String url) {
+    public Map<String, String> createJumpResultMap(FormBody order, Map<String, String> formData, String url) {
         Map<String, String> resultMap = PayService.initRspData(order);
         try {
             resultMap.put(PayConstants.web_code_url, PayService.commonJumpUrl(order));
         } catch (Exception e) {
             log.error("jump加密异常！！");
         }
-        order.setResultMap(resultMap);
+        // order.setResultMap(resultMap);
         Map<String, Object> jumpData = new HashMap<>();
         jumpData.put(PayConstants.web_params, formData);
         jumpData.put(PayConstants.web_form_url, 1);
         jumpData.put(PayConstants.web_action, url);
-        order.setJumpData(jumpData);
+        // order.setJumpData(jumpData);
         return resultMap;
     }
 

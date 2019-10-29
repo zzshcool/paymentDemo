@@ -1,6 +1,7 @@
 package com.example.paymentDemo.paythird.linepay;
 
 import com.example.paymentDemo.common.R;
+import com.example.paymentDemo.model.FormBody;
 import com.example.paymentDemo.model.Order;
 import com.example.paymentDemo.paythird.AbstractPaymentService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -41,16 +42,16 @@ public class LinePayService extends AbstractPaymentService {
     private String requestUri = "/v3/payments/request";
 
     @Override
-    public R order(Order order) {
+    public R order(FormBody order) {
         log.info("Lne Pay  開始------------------------------------------------------");
 
         ResponseEntity<String> rsp = null;
         Map<String, Object> formData = new HashMap<>();
-        formData.put(LinePayConst.amount, order.getAmount().toBigInteger());
+        formData.put(LinePayConst.amount, order.getPrice().toBigInteger());
         formData.put(LinePayConst.currency, "TWD");
-        formData.put(LinePayConst.orderId, order.getOrderNo());
+        //formData.put(LinePayConst.orderId, order.getOrderNo());
         formData.put(LinePayConst.productImageUrl, testImage);
-        formData.put(LinePayConst.confirmUrl, order.getNotifyUrl());
+        formData.put(LinePayConst.confirmUrl, order.getConfirmUrl());
         formData.put(LinePayConst.productName, "Product");
 
 

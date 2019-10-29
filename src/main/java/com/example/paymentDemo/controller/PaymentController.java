@@ -1,16 +1,21 @@
 package com.example.paymentDemo.controller;
 
 
+import com.example.paymentDemo.common.R;
 import com.example.paymentDemo.model.FormBody;
+import com.example.paymentDemo.service.impl.PayService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 @Slf4j
 @Controller
 public class PaymentController {
+
+    @Autowired
+    PayService payService;
+
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index() {
@@ -18,12 +23,9 @@ public class PaymentController {
     }
 
 
-    @RequestMapping(value = "/post/form", method = RequestMethod.POST )
-    public ModelAndView post(@RequestBody FormBody bo, Model model) {
-        log.info("FormBody = {} ", bo);
-
-        model.addAttribute("postData", bo);
-
-        return new ModelAndView("post");
+    @RequestMapping(value = "/post/form", method = RequestMethod.POST)
+    public R post(@RequestBody FormBody bo) {
+        log.info("-----------FormBody = {} --------------", bo);
+        return payService.order(bo);
     }
 }

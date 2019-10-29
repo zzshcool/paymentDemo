@@ -2,6 +2,7 @@ package com.example.paymentDemo.paythird.ecpay;
 
 
 import com.example.paymentDemo.common.R;
+import com.example.paymentDemo.model.FormBody;
 import com.example.paymentDemo.model.Order;
 import com.example.paymentDemo.paythird.AbstractPaymentService;
 import lombok.extern.slf4j.Slf4j;
@@ -38,22 +39,22 @@ public class ECPayService extends AbstractPaymentService {
      */
 
     @Override
-    public R order(Order order) {
+    public R order(FormBody order) {
         //ResponseEntity<String> rsp = null;
         Map<String, String> formData = new HashMap<>();
         try {
             log.info("綠界支付 開始------------------------------------------------------");
             formData.put(ECPayConst.MerchantID, testMerchantNO);
-            formData.put(ECPayConst.MerchantTradeNo, order.getOrderNo());
+//            formData.put(ECPayConst.MerchantTradeNo, order.getOrderNo());
             formData.put(ECPayConst.MerchantTradeDate, ECPayConst.DateFormatter.print(System.currentTimeMillis()));
-            formData.put(ECPayConst.TotalAmount, ECPayConst.AmountFormatter.format(order.getAmount()));
+            formData.put(ECPayConst.TotalAmount, ECPayConst.AmountFormatter.format(order.getPrice()));
             formData.put(ECPayConst.PaymentType, paymentType);
             formData.put(ECPayConst.NeedExtraPaidInfo, NeedExtraPaidInfo);
             formData.put(ECPayConst.ChoosePayment, choosePayment);
             formData.put(ECPayConst.EncryptType, ENC_SHA256);
-            formData.put(ECPayConst.ItemName, order.getOrderNo());
-            formData.put(ECPayConst.TradeDesc, order.getOrderNo());
-            formData.put(ECPayConst.ReturnURL, order.getReturnUrl());
+//            formData.put(ECPayConst.ItemName, order.getOrderNo());
+//            formData.put(ECPayConst.TradeDesc, order.getOrderNo());
+//            formData.put(ECPayConst.ReturnURL, order.getReturnUrl());
             formData.put(ECPayConst.CheckMacValue, this.buildSign(formData, testHashKey, testHashIV));
             log.info(" formData = {} ", formData);
 

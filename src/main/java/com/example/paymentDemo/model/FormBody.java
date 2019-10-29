@@ -1,5 +1,6 @@
 package com.example.paymentDemo.model;
 
+import com.example.paymentDemo.common.enums.PayCompany;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -23,8 +24,11 @@ public class FormBody {
     String currency;
     @ApiModelProperty(value = "Notify Url")
     String confirmUrl;
+    @ApiModelProperty(value = "支付公司代號")
+    PayCompany payCompany;
 
 
-
+    String orderNo;
+    String merchNo;
 }
 

@@ -10,6 +10,7 @@ Ext.application({
                 {
                     xtype: 'textfield',
                     fieldLabel: '商品名稱',
+                    allowBlank: false,
                     name: 'productName'
                 },
                 {
@@ -20,15 +21,25 @@ Ext.application({
                 {
                     xtype: 'numberfield',
                     hideTrigger: true,
+                    allowBlank: false,
                     keyNavEnabled: false,
                     mouseWheelEnabled: false,
                     fieldLabel: '商品價格',
                     name: 'price'
+                }, {
+                    xtype: 'hiddenfield',
+                    name: 'payCompany',
+                    value: 'linepay'
                 },
                 {
                     xtype: 'button',
                     text: '提交',
                     handler: function () {
+
+                        if (!this.up('panel').getForm().isValid()) {
+                            return;
+                        }
+
                         var jsonData = this.up('panel').getForm().getFieldValues();
                         console.log(jsonData);
                         console.log(Ext.util.JSON.encode(jsonData));
@@ -63,6 +74,10 @@ Ext.application({
                 {
                     fieldLabel: 'Last Name',
                     name: 'lastName'
+                }, {
+                    xtype: 'hiddenfield',
+                    name: 'payCompany',
+                    value: 'allpay'
                 },
                 {
                     xtype: 'button',
@@ -86,6 +101,10 @@ Ext.application({
                 {
                     fieldLabel: 'Last Name',
                     name: 'lastName'
+                }, {
+                    xtype: 'hiddenfield',
+                    name: 'payCompany',
+                    value: 'ecpay'
                 },
                 {
                     fieldLabel: 'Date of Birth',
@@ -112,6 +131,10 @@ Ext.application({
                 {
                     fieldLabel: 'Last Name',
                     name: 'lastName'
+                }, {
+                    xtype: 'hiddenfield',
+                    name: 'payCompany',
+                    value: 'alipay'
                 },
                 {
                     fieldLabel: 'Date of Birth',

@@ -12,12 +12,19 @@ import java.math.BigDecimal;
 public class FormBody {
 
     @ApiModelProperty(value = "商品名稱")
-    String merchantName;
+    String productName;
     @ApiModelProperty(value = "商品圖片URL")
-    String merchantImageUrl;
+    String productImageUrl;
     @ApiModelProperty(value = "商品價格")
     BigDecimal price;
     @ApiModelProperty(value = "數量")
     Integer count;
+    @ApiModelProperty(value = "幣別")
+    String currency;
+    @ApiModelProperty(value = "Notify Url")
+    String confirmUrl;
+
+
 
 }
+

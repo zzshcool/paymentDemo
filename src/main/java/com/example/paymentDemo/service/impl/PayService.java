@@ -3,7 +3,6 @@ package com.example.paymentDemo.service.impl;
 
 import com.example.paymentDemo.common.enums.OrderParamKey;
 import com.example.paymentDemo.model.Order;
-import io.micrometer.core.instrument.util.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;

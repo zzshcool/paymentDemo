@@ -1,5 +1,5 @@
 server:
-  port: 8989
+  port: 8080
   maxHttpHeaderSize: 65536
   maxPostSize: 4194304
 spring:

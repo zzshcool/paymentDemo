@@ -18,39 +18,25 @@ Ext.application({
                     name: 'productImageUrl'
                 },
                 {
-                    xtype: 'textfield',
+                    xtype: 'numberfield',
+                    hideTrigger: true,
+                    keyNavEnabled: false,
+                    mouseWheelEnabled: false,
                     fieldLabel: '商品價格',
                     name: 'price'
-                },
-                {
-                    xtype: 'combobox',
-                    name: 'currency',
-                    label: 'Choose Currency',
-                    //queryMode: 'local',
-                    displayField: 'name',
-                    valueField: 'value',
-                    // // For the dropdown list
-                    // itemTpl: '<span role="option" class="x-boundlist-item">{abbr} - {name}</span>',
-                    // // For the content of the text field
-                    // displayTpl: '{abbr} - {name}',
-                    editable: false,  // disable typing in the text field
-                    store: [
-                        {value: 'TWD', name: '台幣'},
-                        {value: 'JPY', name: '日圓'},
-                        {value: 'JPY', name: '人民幣 '},
-                        {value: 'USD', name: '美元 '}
-                    ]
                 },
                 {
                     xtype: 'button',
                     text: '提交',
                     handler: function () {
+                        var jsonData = this.up('panel').getForm().getFieldValues();
+                        console.log(jsonData);
+                        console.log(Ext.util.JSON.encode(jsonData));
                         Ext.Ajax.request({
+                            headers: {'Content-Type': 'application/json'},
                             url: '/post/form',
                             method: 'POST',
-                            params: {
-                                bo: Ext.util.JSON.encode(this.up('panel').getForm().getFieldValues())
-                            },
+                            params: Ext.util.JSON.encode(jsonData),
                             success: function (rsp, opts) {
                                 var obj = Ext.decode(rsp.responseText);
                                 console.dir(obj)

@@ -18,7 +18,7 @@ public class PaymentController {
     }
 
 
-    @RequestMapping(value = "/post/form", method = RequestMethod.POST)
+    @RequestMapping(value = "/post/form", method = RequestMethod.POST )
     public ModelAndView post(@RequestBody FormBody bo, Model model) {
         log.info("FormBody = {} ", bo);
 

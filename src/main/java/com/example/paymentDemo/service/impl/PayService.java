@@ -2,6 +2,7 @@ package com.example.paymentDemo.service.impl;
 
 
 import com.example.paymentDemo.common.R;
+import com.example.paymentDemo.common.consts.PayConstants;
 import com.example.paymentDemo.common.enums.OrderParamKey;
 import com.example.paymentDemo.common.util.CaseNoUtils;
 import com.example.paymentDemo.model.FormBody;
@@ -9,7 +10,6 @@ import com.example.paymentDemo.paythird.allpay.AllPayService;
 import com.example.paymentDemo.paythird.ecpay.ECPayService;
 import com.example.paymentDemo.paythird.linepay.LinePayService;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +28,7 @@ public class PayService {
     ECPayService ecPayService;
 
     private String returnUrl = "www.google.com";
+
 
     /**
      * @param order
@@ -50,6 +51,8 @@ public class PayService {
      */
     public static String commonJumpUrl(FormBody order) throws Exception {
         String domain = order.getConfirmUrl();
+        String jumpUrl = PayConstants.url_pay_jump + "?" + PayConstants.web_context + "=";
+
         return domain;
 //        RedisUtil.getSysConfigValue(CfgKeyConst.pay_jump_url) +
 //                "?" + PayConstants.web_context + "=" + paramEncrypt(order.getMerchNo(), order.getOrderNo());

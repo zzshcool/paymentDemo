@@ -6,6 +6,8 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.Map;
 
 
 @Data
@@ -26,6 +28,8 @@ public class FormBody {
     String confirmUrl;
     @ApiModelProperty(value = "支付公司代號")
     PayCompany payCompany;
+    @ApiModelProperty(value = "跳转结果")
+    Map<String, Object> jumpData = new HashMap<>();
 
 
     String orderNo;

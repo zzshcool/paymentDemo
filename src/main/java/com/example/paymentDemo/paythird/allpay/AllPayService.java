@@ -29,22 +29,21 @@ public class AllPayService extends AbstractPaymentService {
 
     @Override
     public R order(FormBody order) {
-        Map<String, String> resultMap = null;
         log.info("歐付寶支付 開始------------------------------------------------------");
         Map<String, String> formData = new HashMap<>();
         formData.put(ECPayConst.MerchantID, MerchantID);
-//        formData.put(ECPayConst.MerchantTradeNo, order.getOrderNo());
+        formData.put(ECPayConst.MerchantTradeNo, order.getOrderNo());
         formData.put(ECPayConst.MerchantTradeDate, ECPayConst.DateFormatter.print(System.currentTimeMillis()));
         formData.put(ECPayConst.TotalAmount, ECPayConst.AmountFormatter.format(order.getPrice()));
         formData.put(ECPayConst.PaymentType, paymentType);
         formData.put(ECPayConst.ChoosePayment, choosePayment);
-//        formData.put(ECPayConst.ItemName, order.getOrderNo());
-//        formData.put(ECPayConst.TradeDesc, order.getOrderNo());
+        formData.put(ECPayConst.ItemName, order.getOrderNo());
+        formData.put(ECPayConst.TradeDesc, order.getOrderNo());
         formData.put(ECPayConst.ReturnURL, order.getConfirmUrl());
         formData.put(ECPayConst.EncryptType, checkMacValue);
         formData.put(ECPayConst.CheckMacValue, this.buildSign(formData, hashKey, hashIV));
         log.info("歐付寶支付 結束------------------------------------------------------");
-        return R.okData(this.createJumpResultMap(order, formData, testAllPayURL));
+        return R.okData(this.createJumpResultJSONString(formData, testAllPayURL));
     }
 
 

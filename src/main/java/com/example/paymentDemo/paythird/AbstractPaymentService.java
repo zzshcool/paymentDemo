@@ -1,9 +1,11 @@
 package com.example.paymentDemo.paythird;
 
+import com.alibaba.fastjson.JSONObject;
 import com.example.paymentDemo.common.R;
 import com.example.paymentDemo.common.consts.PayConstants;
 import com.example.paymentDemo.common.util.MD5Util;
 import com.example.paymentDemo.model.FormBody;
+import com.example.paymentDemo.model.JumpData;
 import com.example.paymentDemo.model.Order;
 import com.example.paymentDemo.paythird.ecpay.ECPayConst;
 import com.example.paymentDemo.paythird.ecpay.SHAUtil;
@@ -14,6 +16,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeSet;
@@ -84,8 +87,17 @@ public abstract class AbstractPaymentService {
         jumpData.put(PayConstants.web_params, formData);
         jumpData.put(PayConstants.web_form_url, 1);
         jumpData.put(PayConstants.web_action, url);
-        // order.setJumpData(jumpData);
+        order.setJumpData(jumpData);
         return resultMap;
     }
+
+    public String createJumpResultJSONString(Map<String, String> formData, String postUrl) {
+        JumpData jumpData = new JumpData();
+        jumpData.setAction(postUrl);
+        jumpData.setParams(formData);
+        Base64.Encoder encoder = Base64.getEncoder();
+        return PayConstants.web_jump_url + "?" + PayConstants.web_context + "=" + encoder.encodeToString(JSONObject.toJSONString(jumpData).getBytes());
+    }
+
 
 }

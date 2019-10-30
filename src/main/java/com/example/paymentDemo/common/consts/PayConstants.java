@@ -28,6 +28,8 @@ public interface PayConstants {
 
     /***提交跳转数据参数****/
     String web_jumpData = "jumpData";
+    /***JUMP 跳轉 URL****/
+    String web_jump_url = "order/jump";
     /***提交密文参数***/
     String web_context = "context";
     /***form提交表单***/
@@ -35,7 +37,7 @@ public interface PayConstants {
     /***form提交参数***/
     String web_params = "params";
     /***支付错误链接地址**/
-    String url_pay_error = "pay/error";
+    String url_pay_error = "error";
     /***支付跳转中间地址***/
     String url_pay_jump = "pay/jump";
     /***支付跳转中间绑卡***/

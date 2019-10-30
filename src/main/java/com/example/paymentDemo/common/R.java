@@ -3,11 +3,13 @@ package com.example.paymentDemo.common;
 import com.alibaba.fastjson.JSONObject;
 import com.example.paymentDemo.common.consts.Constant;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.Map;
 
+@Component
 public class R extends HashMap<String, Object> {
     private static final long serialVersionUID = 1L;
 

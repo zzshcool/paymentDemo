@@ -3,11 +3,13 @@ package com.example.paymentDemo.service.impl;
 
 import com.example.paymentDemo.common.R;
 import com.example.paymentDemo.common.enums.OrderParamKey;
+import com.example.paymentDemo.common.util.CaseNoUtils;
 import com.example.paymentDemo.model.FormBody;
 import com.example.paymentDemo.paythird.allpay.AllPayService;
 import com.example.paymentDemo.paythird.ecpay.ECPayService;
 import com.example.paymentDemo.paythird.linepay.LinePayService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +26,8 @@ public class PayService {
     LinePayService linePayService;
     @Autowired
     ECPayService ecPayService;
+
+    private String returnUrl = "www.google.com";
 
     /**
      * @param order
@@ -56,6 +60,8 @@ public class PayService {
             return R.error("未找到支付公司！");
         }
 
+        bo.setOrderNo(CaseNoUtils.genOrderNo());
+        bo.setConfirmUrl(returnUrl);
         switch (bo.getPayCompany()) {
             case ecpay:
                 return ecPayService.order(bo);

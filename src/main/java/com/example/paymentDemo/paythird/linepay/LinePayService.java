@@ -72,7 +72,7 @@ public class LinePayService extends AbstractPaymentService {
         log.info("Line Pay  結束------------------------------------------------------");
         rsp = restTemplate.postForEntity(testurl, request, LienPayRspVO.class);
         log.info(" rsp = {} ", rsp);
-        return R.okData(rsp.getBody().getInfo().getPaymentUrl());
+        return R.okData(rsp.getBody().getInfo().getPaymentUrl().getWeb());
     }
 
     @Override

@@ -1,8 +1,11 @@
+var app = {};
+
 Ext.application({
     name: 'PaymentApp',
     launch: function () {
 
-        var linePayForm = Ext.create('Ext.form.Panel', {
+
+        app.linePayForm = Ext.create('Ext.form.Panel', {
             title: 'Line Pay',
             bodyPadding: 10,
             layout: 'vbox',
@@ -40,9 +43,8 @@ Ext.application({
                             return;
                         }
 
+                        app.processBar.show();
                         var jsonData = this.up('panel').getForm().getFieldValues();
-                        console.log(jsonData);
-                        console.log(Ext.util.JSON.encode(jsonData));
                         Ext.Ajax.request({
                             headers: {'Content-Type': 'application/json'},
                             url: '/post/form',
@@ -50,10 +52,14 @@ Ext.application({
                             params: Ext.util.JSON.encode(jsonData),
                             success: function (rsp, opts) {
                                 var obj = Ext.decode(rsp.responseText);
-                                console.dir(obj)
+                                console.dir(obj);
+                                app.processBar.hide();
+                                app.linePayForm.reset();
+                                window.open(obj.data, '_blank')
                             },
 
                             failure: function (rsp, opts) {
+                                app.processBar.hide();
                                 console.log('server-side failure with status code ' + rsp.status);
                             }
                         });
@@ -62,7 +68,7 @@ Ext.application({
             ]
         });
 
-        var allPayForm = Ext.create('Ext.form.Panel', {
+        app.allPayForm = Ext.create('Ext.form.Panel', {
             title: '歐付寶',
             bodyPadding: 10,
             defaultType: 'textfield',
@@ -89,7 +95,7 @@ Ext.application({
             ]
         });
 
-        var greenPayForm = Ext.create('Ext.form.Panel', {
+        app.greenPayForm = Ext.create('Ext.form.Panel', {
             title: '綠界支付',
             bodyPadding: 10,
             defaultType: 'textfield',
@@ -119,7 +125,7 @@ Ext.application({
             ]
         });
 
-        var aliPayForm = Ext.create('Ext.form.Panel', {
+        app.aliPayForm = Ext.create('Ext.form.Panel', {
             title: '支付寶',
             bodyPadding: 10,
             defaultType: 'textfield',
@@ -149,19 +155,24 @@ Ext.application({
             ]
         });
 
-        Ext.create('Ext.TabPanel', {
+        app.mainPanel = Ext.create('Ext.TabPanel', {
             renderTo: document.body,
             fullscreen: true,
             defaults: {
                 styleHtmlContent: true
             },
             items: [
-                linePayForm,
-                allPayForm,
-                greenPayForm,
-                aliPayForm
+                app.linePayForm,
+                app.allPayForm,
+                app.greenPayForm,
+                app.aliPayForm
             ]
-
         });
+
+        app.processBar = new Ext.LoadMask({
+            msg: 'Please wait...',
+            target: app.mainPanel
+        });
+
     }
 });

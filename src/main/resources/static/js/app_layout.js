@@ -1,7 +1,3 @@
-var App = {};
-var Method = {};
-var submitText = '產生支付訂單';
-
 Ext.application({
     name: 'PaymentApp',
     launch: function () {

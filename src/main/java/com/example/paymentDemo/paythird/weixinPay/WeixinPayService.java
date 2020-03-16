@@ -1,4 +1,4 @@
-package com.example.paymentDemo.paythird.alipay;
+package com.example.paymentDemo.paythird.weixinPay;
 
 
 import com.example.paymentDemo.common.R;
@@ -8,13 +8,19 @@ import com.example.paymentDemo.paythird.AbstractPaymentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+
+/***
+ *
+ * 微信支付
+ *
+ */
 @Slf4j
 @Service
-public class AliPayService extends AbstractPaymentService {
+public class WeixinPayService extends AbstractPaymentService {
+
     @Override
     public R order(FormBody order) {
-
-        log.info(" 支付寶尚未實作");
+        log.info("--------------尚未實作-------------");
         return null;
     }
 

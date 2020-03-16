@@ -6,6 +6,7 @@ import com.example.paymentDemo.common.consts.PayConstants;
 import com.example.paymentDemo.common.enums.OrderParamKey;
 import com.example.paymentDemo.common.util.CaseNoUtils;
 import com.example.paymentDemo.model.FormBody;
+import com.example.paymentDemo.paythird.alipay.AliPayService;
 import com.example.paymentDemo.paythird.allpay.AllPayService;
 import com.example.paymentDemo.paythird.ecpay.ECPayService;
 import com.example.paymentDemo.paythird.linepay.LinePayService;
@@ -26,6 +27,8 @@ public class PayService {
     LinePayService linePayService;
     @Autowired
     ECPayService ecPayService;
+    @Autowired
+    AliPayService aliPayService;
 
     private String returnUrl = "www.google.com";
 
@@ -72,6 +75,8 @@ public class PayService {
                 return allPayService.order(bo);
             case linepay:
                 return linePayService.order(bo);
+            case alipay:
+                return aliPayService.order(bo);
             default:
                 log.error("未找到支付公司！");
                 return R.error("未找到支付公司！");
